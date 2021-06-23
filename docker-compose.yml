@@ -1,0 +1,32 @@
+version: '3.0'
+services:
+  rasa-mati:
+    image: rasa/rasa:2.6.3-full
+    ports:
+      - 5005:5005
+    volumes:
+      - ./patbot:/app
+    command:
+      - run
+  rasa-juampi:
+    image: rasa/rasa:2.6.3-full
+    ports:
+      - 5006:5005
+    volumes:
+      - ./juampibot:/app
+    command:
+      - run
+  app:
+    image: leonell147/action-server:v3
+    expose: 
+      - 5055
+    container_name: action-server
+  app2:
+    image: leonell147/action-server-juampi:v1
+    expose: 
+      - 5056
+    container_name: action-server-juanpi
+  flask:
+    image: leonell147/agiletalk:v9
+    ports:
+      - 5000:5000
